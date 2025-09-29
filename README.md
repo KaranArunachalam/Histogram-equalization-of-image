@@ -23,8 +23,8 @@ The Histogram of gray scale image and color image is shown.
 
 ## Program:
 ```python
-# Developed By: SYED ABBU REHAN
-# Register Number: 212223240165
+# Developed By: Karan A
+# Register Number: 212223230099
 ```
 ## Gray Image And Color Image
 ```
