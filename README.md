@@ -26,63 +26,38 @@ The Histogram of gray scale image and color image is shown.
 # Developed By: Karan A
 # Register Number: 212223230099
 ```
-## Gray Image And Color Image
-```
+```py
 import cv2
-gray_img = cv2.imread('grayimage.jpg')
-gray_img = cv2.resize(gray_img,(300,200))
-color_img = cv2.imread('colorimage.jpg')
-color_img = cv2.resize(color_img,(300,200))
-cv2.imshow("Gray Image",gray_img)
-cv2.imshow("Colour Image",color_img)
-cv2.waitKey(0)
-```
-## Histogram of Grayscale Image
-```
-import cv2
+import numpy as np
 import matplotlib.pyplot as plt
-gray_img = cv2.imread('grayimage.jpg')
-color_img = cv2.imread('colorimage.jpg')
-hist = cv2.calcHist([gray_img],[0],None,[256],[0,256])
-hist1 = cv2.calcHist([color_img],[1],None,[256],[0,256])
-plt.figure()
-plt.imshow(gray_img)
-plt.show()
-plt.title("Histogram")
-plt.xlabel('grayscale value')
-plt.ylabel('pixel count')
-plt.stem(hist)
-plt.show()
-```
 
-## Histogram of Color Image
-```
-import cv2
-import matplotlib.pyplot as plt
-gray_img = cv2.imread('grayimage.jpg')
-color_img = cv2.imread('colorimage.jpg')
-hist = cv2.calcHist([gray_img],[0],None,[256],[0,256])
-hist1 = cv2.calcHist([color_img],[1],None,[256],[0,256])
-plt.figure()
-plt.imshow(color_img)
+# Read the image in grayscale format
+img = cv2.imread('parrot.jpg', cv2.IMREAD_GRAYSCALE)
+
+# Display the original image
+plt.imshow(img, cmap='gray')
+plt.title('Original Image')
 plt.show()
-plt.title("Histogram")
-plt.xlabel('grayscale value')
-plt.ylabel('pixel count')
-plt.stem(hist1)
+
+# Compare arrays properly
+assert np.array_equal(img, cv2.imread('parrot.jpg', cv2.IMREAD_GRAYSCALE))
+
+# Apply histogram equalization
+img_eq = cv2.equalizeHist(img)
+
+# Display histograms
+plt.figure(figsize=[15,4])
+plt.subplot(121); plt.hist(img.ravel(), 256, range=[0,256]); plt.title('Original Histogram')
+plt.subplot(122); plt.hist(img_eq.ravel(), 256, range=[0,256]); plt.title('Equalized Histogram')
 plt.show()
-```
-## Histogram Equilization of GrayScale Image
-```
-import cv2
-gray_img = cv2.imread('grayimage.jpg',0)
-gray_img = cv2.resize(gray_img,(300,200))
-cv2.imshow('Grey Scale Image',gray_img)
-equ = cv2.equalizeHist(gray_img)
-cv2.imshow("Equalized Image",equ)
-cv2.waitKey(0)
+
+# Display the equalized image
+plt.imshow(img_eq, cmap='gray')
+plt.title('Histogram Equalized Image')
+plt.show()
 ```
 ## Output:
+<img width="754" height="535" alt="image" src="https://github.com/user-attachments/assets/cee00c60-f1d2-48bf-a8f6-c01dff8ab956" />
 
 ## Result: 
 Thus the histogram for finding the frequency of pixels in an image with pixel values ranging from 0 to 255 is obtained. Also,histogram equalization is done for the gray scale image using OpenCV.
